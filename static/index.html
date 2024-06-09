@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>CRM API Documentation</h1>
+    <p>Welcome to the CRM API documentation. This document provides all the information you need to interact with our CRM API.</p>
+
+    <h2>Overview</h2>
+    <p>The API allows you to perform operations such as retrieving data and submitting requests over Curtomers database. Below is a list of available endpoints and their usage.</p>
+
+    <h2>Endpoints</h2>
+    <h3>GET /api/v1/customers</h3>
+    <p>Retrieve a list of customers.</p>
+    <h4>Example</h4>
+    <p>Request</p>
+    <pre><code>
+    curl --location 'localhost:3000/api/v1/customers'
+    </code></pre>
+    <p>Response</p>
+    <pre><code>
+    {
+        "1": {
+            "ID": "1",
+            "Name": "Alice",
+            "Role": "Software Engineer",
+            "Email": "alice@example.com",
+            "Phone": "6785556789",
+            "Contacted": false
+        },
+        "2": {
+            "ID": "2",
+            "Name": "Bob",
+            "Role": "Account Manager",
+            "Email": "bob@example.com",
+            "Phone": "6785556780",
+            "Contacted": true
+        }
+    }
+    </code></pre>
+
+    <h3>POST /api/v1/customers</h3>
+    <p>Create a new customer.</p>
+    <h4>Example</h4>
+    <p>Request</p>
+    <pre><code>
+    curl --location 'localhost:3000/api/v1/customers' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "ID": "4",
+        "Name": "Alanis",
+        "Role": "Software Engineer",
+        "Email": "alanis@example.com",
+        "Phone": "6785556783",
+        "Contacted": false
+    }'
+    </code></pre>
+    <p>Response</p>
+    <pre><code>
+    {
+        "1": {
+            "ID": "1",
+            "Name": "Alice",
+            "Role": "Software Engineer",
+            "Email": "alice@example.com",
+            "Phone": "6785556789",
+            "Contacted": false
+        },
+        "2": {
+            "ID": "2",
+            "Name": "Bob",
+            "Role": "Account Manager",
+            "Email": "bob@example.com",
+            "Phone": "6785556780",
+            "Contacted": true
+        },
+        "4": {
+            "ID": "4",
+            "Name": "Alanis",
+            "Role": "Software Engineer",
+            "Email": "alanis@example.com",
+            "Phone": "6785556783",
+            "Contacted": false
+        }
+    }
+    </code></pre>
+
+    <h3>GET /api/v1/customers/{ID}</h3>
+    <p>Retrieve a specific customer by ID.</p>
+    <h4>Example</h4>
+    <p>Request</p>
+    <pre><code>
+    curl --location 'localhost:3000/api/v1/customers/1'
+    </code></pre>
+    <p>Response</p>
+    <pre><code>
+    {
+        "ID": "1",
+        "Name": "Alice",
+        "Role": "Software Engineer",
+        "Email": "alice@example.com",
+        "Phone": "6785556789",
+        "Contacted": false
+    }
+    </code></pre>
+
+    <h3>PUT /api/v1/resources/{ID}</h3>
+    <p>Update a specific customer by ID.</p>
+    <h4>Example</h4>
+    <p>Request</p>
+    <pre><code>
+    curl --location --request PUT 'localhost:3000/api/v1/customers/4' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "ID": "4",
+        "Name": "Alanis",
+        "Role": "Technical Leader",
+        "Email": "alanis@example.com",
+        "Phone": "6785556783",
+        "Contacted": false
+    }'
+    </code></pre>
+    <p>Response</p>
+    <pre><code>
+    {
+        "ID": "4",
+        "Name": "Alanis",
+        "Role": "Technical Leader",
+        "Email": "alanis@example.com",
+        "Phone": "6785556783",
+        "Contacted": false
+    }
+    </code></pre>
+
+    <h3>DELETE /api/v1/resources/{ID}</h3>
+    <p>Delete a specific customer by ID.</p>
+    <h4>Example</h4>
+    <p>Request</p>
+    <pre><code>
+    curl --location --request DELETE 'localhost:3000/api/v1/customers/4'
+    </code></pre>
+    <p>Response</p>
+    <pre><code>
+    {
+        "1": {
+            "ID": "1",
+            "Name": "Alice",
+            "Role": "Software Engineer",
+            "Email": "alice@example.com",
+            "Phone": "6785556789",
+            "Contacted": false
+        },
+        "2": {
+            "ID": "2",
+            "Name": "Bob",
+            "Role": "Account Manager",
+            "Email": "bob@example.com",
+            "Phone": "6785556780",
+            "Contacted": true
+        }
+    }
+    </code></pre>
+</div>
+</body>
+</html>
