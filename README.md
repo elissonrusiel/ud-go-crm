@@ -1,4 +1,4 @@
-# Project Title
+# Go CRM API
 
 This project is a CRM API for Udacity Go Developer course.
 
