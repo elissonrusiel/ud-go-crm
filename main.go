@@ -77,6 +77,35 @@ func updateCustomer(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func updateCustomers(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var newEntries []Customer
+
+	reqBody, _ := io.ReadAll(r.Body)
+	json.Unmarshal(reqBody, &newEntries)
+
+	var notFound []string
+	for _, newEntry := range newEntries {
+		if _, ok := customers[newEntry.ID]; ok {
+			customers[newEntry.ID] = newEntry
+		} else {
+			notFound = append(notFound, newEntry.ID)
+		}
+	}
+
+	if len(notFound) > 0 {
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"message": "Some customers not found",
+			"ids":     notFound,
+			"data":    customers,
+		})
+	} else {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(customers)
+	}
+}
+
 func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	id := mux.Vars(r)["ID"]
@@ -103,6 +132,7 @@ func main() {
 	router.HandleFunc("/api/v1/customers/{ID}", getCustomer).Methods("GET")
 	router.HandleFunc("/api/v1/customers", addCustomer).Methods("POST")
 	router.HandleFunc("/api/v1/customers/{ID}", updateCustomer).Methods("PUT")
+	router.HandleFunc("/api/v1/customers", updateCustomers).Methods("PATCH")
 	router.HandleFunc("/api/v1/customers/{ID}", deleteCustomer).Methods("DELETE")
 
 	fmt.Println("Server is starting on port 3000...")

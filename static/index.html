@@ -167,6 +167,58 @@
     }
     </code></pre>
 
+    <h3>PATCH /api/v1/resources</h3>
+    <p>Update customers in Batch.</p>
+    <h4>Example</h4>
+    <p>Request</p>
+    <pre><code>
+    curl --location --request PATCH 'localhost:3000/api/v1/customers' \
+    --header 'Content-Type: application/json' \
+    --data-raw '[
+        {
+            "ID": "1",
+            "Name": "Alice Wonderful",
+            "Role": "Software Engineer",
+            "Email": "alice@example.com",
+            "Phone": "6785556789",
+            "Contacted": false
+        },
+        {
+            "ID": "2",
+            "Name": "Bob Ferguson",
+            "Role": "Account Manager",
+            "Email": "bob@example.com",
+            "Phone": "6785556780",
+            "Contacted": true
+        }
+    ]'
+    </code></pre>
+    <p>Response</p>
+    <pre><code>
+    {
+        "1": {
+            "ID": "1",
+            "Name": "Alice Wonderful",
+            "Role": "Software Engineer",
+            "Email": "alice@example.com",
+            "Phone": "6785556789",
+            "Contacted": false
+        },
+        "2": {
+            "ID": "2",
+            "Name": "Bob Ferguson",
+            "Role": "Account Manager",
+            "Email": "bob@example.com",
+            "Phone": "6785556780",
+            "Contacted": true
+        }
+    }
+    </code></pre>
+
+    
+
+
+
     <h3>DELETE /api/v1/resources/{ID}</h3>
     <p>Delete a specific customer by ID.</p>
     <h4>Example</h4>
