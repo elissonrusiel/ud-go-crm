@@ -8,7 +8,7 @@ Describe the installation process here. This might include:
 
 1. Cloning the repo: `git clone https://github.com/elissonrusiel/ud-go-crm.git`
 2. Navigating into the project directory
-3. Run project with the command: `go run`
+3. Run project with the command: `go run main.go`
 
 ## Build
 
@@ -23,12 +23,12 @@ go build
 To run the project, run the following command:
 
 ```bash
-go run
+go run main.go
 ```
 
 ## Usage
 
-1. Run the application: `go run`
+1. Run the application: `go run main.go`
 2. Open documentation in a browser: `localhost:3000`
 
 
